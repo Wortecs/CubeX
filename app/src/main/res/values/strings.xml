@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CubeX</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_end">EndActivity</string>
+
+
+    <string name="SendToGame">SendToGame</string>
+    <string name="SendToMain">SendToMain</string>
+    <string name="SendToEnd">SendToEnd</string>
+    <string name="GetInGame">SendToGame</string>
+    <string name="GetInMain">SendToMain</string>
+    <string name="GetInEnd">SendToEnd</string>
+
+</resources>
