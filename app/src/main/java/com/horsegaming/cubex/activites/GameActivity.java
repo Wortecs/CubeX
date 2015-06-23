@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.horsegaming.cubex.R;
 import com.horsegaming.cubex.activites.interfaces.ISwitchable;
 import com.horsegaming.cubex.activites.parameters.StartParams;
+import com.horsegaming.cubex.core.view.GameView;
 import com.horsegaming.cubex.staticclasses.Mediator;
 
 public class GameActivity extends Activity implements ISwitchable{
@@ -16,9 +17,7 @@ public class GameActivity extends Activity implements ISwitchable{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
-
-
+        setContentView(new GameView(this));
     }
 
     @Override

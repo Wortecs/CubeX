@@ -2,8 +2,12 @@ package com.horsegaming.cubex.core.gamethreed;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
+import com.horsegaming.cubex.core.elements.Box;
+import com.horsegaming.cubex.core.enums.BoxType;
 import com.horsegaming.cubex.core.variables.GameObject;
 
 import java.util.ArrayList;
@@ -18,15 +22,18 @@ public final class GameThread extends Thread
     private SurfaceHolder _holder;
     private Resources _resources;
 
-    private List<GameObject> _gameObjects = new ArrayList<>();
+    private static List<GameObject> _gameObjects;
 
     public GameThread(SurfaceHolder holder, Resources resources, List<GameObject> gameObjects)
     {
         this(holder,resources);
-        this._gameObjects = gameObjects;
+        if(gameObjects != null)
+            this._gameObjects = gameObjects;
+        else
+            this._gameObjects = new ArrayList<>();
     }
 
-    public GameThread(SurfaceHolder holder, Resources resources)
+    private GameThread(SurfaceHolder holder, Resources resources)
     {
         this._resources = resources;
         this._holder = holder;
@@ -42,8 +49,7 @@ public final class GameThread extends Thread
                 canvas = _holder.lockCanvas(null);
                 synchronized (_holder)
                 {
-                    this.update();
-                    this.draw(canvas);
+                    this.update(canvas);
                 }
             }
             finally {
@@ -54,16 +60,16 @@ public final class GameThread extends Thread
         }
     }
 
-    //TODO
-    private void update()
+    private  void update( Canvas canvas )
     {
+        if(canvas == null) return;
 
-    }
+        canvas.drawColor(Color.rgb(236, 240, 241));
+        for (GameObject gameObject : _gameObjects) {
+            gameObject.draw(canvas);
+            gameObject.update();
 
-    //TODO
-    private  void draw( Canvas canvas)
-    {
-
+        }
     }
 
     public void setRunning (boolean status)
@@ -71,5 +77,13 @@ public final class GameThread extends Thread
         this._isRunning = status;
     }
 
+    public static GameObject FindGameObjectByTag(String tag)
+    {
+        for ( GameObject gameObject : _gameObjects  ) {
+            if (gameObject.Tag == tag)
+                return gameObject;
+        }
+        return  null;
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.horsegaming.cubex.core.view;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -16,14 +17,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
     public GameView(Context context)
     {
         super(context);
-        getHolder().addCallback(this);
+        this.getHolder().addCallback(this);
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder)
     {
-        this._gameThread = new GameThread(this.getHolder(), this.getResources());
+        //TODO
+        this._gameThread = new GameThread(this.getHolder(), this.getResources(), null);
+        this._gameThread.start();
         this._gameThread.setRunning(true);
+        Log.d(this.toString(), "work");
     }
 
     @Override
