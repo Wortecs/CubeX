@@ -7,7 +7,6 @@ import android.os.Parcelable;
  */
 public interface ISwitchable
 {
-    //TODO PARAMETERS
     void toNext( Parcelable sendParameters);
     void toPrevious( Parcelable sendParameters );
 }

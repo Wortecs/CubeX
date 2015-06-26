@@ -3,11 +3,11 @@ package com.horsegaming.cubex.core.gamethreed;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.util.Log;
+import android.graphics.Point;
 import android.view.SurfaceHolder;
 
-import com.horsegaming.cubex.core.elements.Box;
-import com.horsegaming.cubex.core.enums.BoxType;
+import com.horsegaming.cubex.core.elements.fields.BoxRandomGenerator;
+import com.horsegaming.cubex.core.elements.fields.GameField;
 import com.horsegaming.cubex.core.variables.GameObject;
 
 import java.util.ArrayList;
@@ -31,6 +31,10 @@ public final class GameThread extends Thread
             this._gameObjects = gameObjects;
         else
             this._gameObjects = new ArrayList<>();
+        //TODO DELLETE
+
+        this._gameObjects.add(new GameField(new Point(0,0),new Point(500,500),"",10, null));
+
     }
 
     private GameThread(SurfaceHolder holder, Resources resources)
@@ -46,11 +50,11 @@ public final class GameThread extends Thread
         while (_isRunning) {
             canvas = null;
             try {
+                try {  this.sleep(200); } catch (InterruptedException e) { e.printStackTrace();   }
                 canvas = _holder.lockCanvas(null);
-                synchronized (_holder)
-                {
+
                     this.update(canvas);
-                }
+
             }
             finally {
                 if (canvas != null) {

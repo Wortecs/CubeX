@@ -3,7 +3,9 @@ package com.horsegaming.cubex.core.variables;
 import android.graphics.Canvas;
 import android.graphics.Point;
 
+import com.horsegaming.cubex.core.enums.BoxType;
 import com.horsegaming.cubex.core.interfaces.IDrawable;
+import com.horsegaming.cubex.core.interfaces.IDrawer;
 import com.horsegaming.cubex.core.interfaces.IMovable;
 import com.horsegaming.cubex.core.interfaces.ISizable;
 import com.horsegaming.cubex.core.interfaces.IUpdatable;
@@ -13,7 +15,7 @@ import com.horsegaming.cubex.core.interfaces.IUpdatable;
  */
 public abstract class GameObject implements IDrawable, ISizable, IMovable, IUpdatable
 {
-    protected IDrawable drawable = new DoNothing();
+    protected IDrawer drawable = new DoNothing();
     protected ISizable sizable = new DoNothing();
     protected IUpdatable updatable = new DoNothing();
     protected IMovable movable = new DoNothing();
@@ -29,14 +31,19 @@ public abstract class GameObject implements IDrawable, ISizable, IMovable, IUpda
         this.Tag = tag;
     }
 
-    public void changeDrawer(IDrawable drawer) {
+    public GameObject( int xPos, int yPos, int xSize, int ySize, String tag, BoxType type)
+    {
+        this(new Point(xPos,yPos), new Point(xSize,ySize),tag);
+    }
+
+    public void setDrawer(IDrawer drawer) {
         this.drawable = drawer;
     }
 
     @Override
     public void draw(Canvas canvas)
     {
-        this.drawable.draw(canvas);
+        this.drawable.draw(canvas, this.Position, this.Size);
     }
 
     @Override
@@ -58,4 +65,6 @@ public abstract class GameObject implements IDrawable, ISizable, IMovable, IUpda
     public void update() {
         this.updatable.update();
     }
+
+
 }

@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 
 import com.horsegaming.cubex.core.interfaces.IDrawable;
+import com.horsegaming.cubex.core.interfaces.IDrawer;
 import com.horsegaming.cubex.core.interfaces.IMovable;
 import com.horsegaming.cubex.core.interfaces.ISizable;
 import com.horsegaming.cubex.core.interfaces.IUpdatable;
@@ -11,15 +12,11 @@ import com.horsegaming.cubex.core.interfaces.IUpdatable;
 /**
  * Created by Horse on 21.06.2015.
  */
-//Еласс-болванка
+
 public class DoNothing
-    implements IDrawable, IMovable, ISizable, IUpdatable
+    implements IDrawer, IMovable, ISizable, IUpdatable
 {
-    @Override
-    public void draw(Canvas canvas) {
 
-
-    }
     @Override
     public void move(Point newPosition) {
 
@@ -34,6 +31,10 @@ public class DoNothing
     }
     @Override
     public void update() {
+
+    }
+    @Override
+    public void draw(Canvas canvas, Point position, Point size) {
 
     }
 }

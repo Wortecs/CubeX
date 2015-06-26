@@ -27,7 +27,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
         this._gameThread = new GameThread(this.getHolder(), this.getResources(), null);
         this._gameThread.start();
         this._gameThread.setRunning(true);
-        Log.d(this.toString(), "work");
+
     }
 
     @Override
