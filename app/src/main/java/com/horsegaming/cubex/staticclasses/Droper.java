@@ -20,8 +20,11 @@ public class Droper
             {
                 if(matrix[i][j-1]  == null && matrix[i][j] != null)
                 {
-                    matrix[i][j].move(new Point(matrix.length - i,matrix.length - j - 1));
-                    matrix[i][j-1] = matrix[i][j];
+                    if(matrix[i][j].move(new Point(matrix.length - i,matrix.length - j)))
+                    {
+                         matrix[i][j-1] = matrix[i][j];
+                         matrix[i][j] = null;
+                    }
                 }
             }
         }

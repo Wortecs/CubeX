@@ -7,5 +7,5 @@ import android.graphics.Point;
  */
 public interface IMovable
 {
-    void move(Point newPosition);
+    boolean move(Point newPosition);
 }

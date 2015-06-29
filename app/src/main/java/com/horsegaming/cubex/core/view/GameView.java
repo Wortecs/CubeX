@@ -1,7 +1,9 @@
 package com.horsegaming.cubex.core.view;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -50,6 +52,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback
 
             }
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        if(event.getAction() == MotionEvent.ACTION_UP)
+        _gameThread.click(new Point((int)event.getX(),(int)event.getY()));
+        return true;
     }
 
 }

@@ -15,6 +15,7 @@ import com.horsegaming.cubex.staticclasses.Mediator;
 public class RectBoxDrawer implements IReDrawable {
 
     private Paint _paint;
+    private int _frame = 3;
 
     public RectBoxDrawer(int type)
     {
@@ -30,8 +31,9 @@ public class RectBoxDrawer implements IReDrawable {
 
     @Override
     public void draw(Canvas canvas, Point position, Point size) {
-        canvas.drawRoundRect(Mediator.RectFAdapt(position,size)
+        canvas.drawRoundRect(Mediator.RectFAdapt(position.x + _frame, position.y + _frame,size.x-_frame*2,size.y-_frame*2)
                 ,size.x/10,size.y/10,this._paint);
+
     }
 
     @Override

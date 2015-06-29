@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 
 import com.horsegaming.cubex.core.enums.BoxType;
+import com.horsegaming.cubex.core.interfaces.IClicable;
 import com.horsegaming.cubex.core.interfaces.IDrawable;
 import com.horsegaming.cubex.core.interfaces.IDrawer;
 import com.horsegaming.cubex.core.interfaces.IMovable;
@@ -13,12 +14,13 @@ import com.horsegaming.cubex.core.interfaces.IUpdatable;
 /**
  * Created by Horse on 20.06.2015.
  */
-public abstract class GameObject implements IDrawable, ISizable, IMovable, IUpdatable
+public abstract class GameObject implements IDrawable, ISizable, IMovable, IUpdatable, IClicable
 {
     protected IDrawer drawable = new DoNothing();
     protected ISizable sizable = new DoNothing();
     protected IUpdatable updatable = new DoNothing();
     protected IMovable movable = new DoNothing();
+    protected IClicable clicable = new DoNothing();
 
     public String Tag;
     public Point Position;
@@ -47,8 +49,14 @@ public abstract class GameObject implements IDrawable, ISizable, IMovable, IUpda
     }
 
     @Override
-    public void move(Point newPosition) {
-        this.movable.move(newPosition);
+    public boolean move(Point newPosition) {
+        return this.movable.move(newPosition);
+
+    }
+
+    @Override
+    public void click(Point clickPos) {
+        this.clicable.click(clickPos);
     }
 
     @Override
@@ -66,5 +74,18 @@ public abstract class GameObject implements IDrawable, ISizable, IMovable, IUpda
         this.updatable.update();
     }
 
+    public boolean contains(Point position)
+    {
+
+        return this.contains(position.x,position.y);
+    }
+    public boolean contains(int xPos, int yPos)
+    {
+        if(xPos > this.Position.x && xPos < this.Position.x + this.Size.x &&
+            yPos > this.Position.y && yPos < this.Position.y + this.Size.y    )
+            return true;
+        else
+            return false;
+    }
 
 }

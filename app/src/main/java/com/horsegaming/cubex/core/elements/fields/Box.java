@@ -4,7 +4,9 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 
 import com.horsegaming.cubex.core.enums.BoxType;
-import com.horsegaming.cubex.core.interfaces.IDrawer;
+import com.horsegaming.cubex.core.gamethreed.GameThread;
+import com.horsegaming.cubex.core.interfaces.IClicable;
+import com.horsegaming.cubex.core.interfaces.IDestroyable;
 import com.horsegaming.cubex.core.interfaces.IMovable;
 import com.horsegaming.cubex.core.interfaces.IReDrawable;
 import com.horsegaming.cubex.core.interfaces.ISizable;
@@ -16,11 +18,14 @@ import com.horsegaming.cubex.core.elements.fields.drawers.RectBoxDrawer;
  * Created by Horse on 21.06.2015.
 */
 
-final class Box extends GameObject
+final class Box extends GameObject implements IDestroyable
 {
     public BoxType Type;
     protected IReDrawable drawable;
     public Point MatrixPosition = new Point();
+
+    private boolean _isMark;
+    private boolean _isDestroy;
 
     public Box(Point position, Point size, String tag, BoxType type, boolean movable)
     {
@@ -29,11 +34,9 @@ final class Box extends GameObject
         this.drawable = new RectBoxDrawer(type.ordinal());
         this.sizable = new BoxSizer(this);
         this.updatable = new BoxUpdater(this);
+        this.clicable = new BoxClicker();
         if(movable)
             this.movable = new BoxMover(this);
-
-
-
     }
 
     public Box( int xPos, int yPos, int xSize, int ySize, String tag, BoxType type, boolean movable)
@@ -68,6 +71,31 @@ final class Box extends GameObject
     {
         this.drawable.reDraw(this.Type.ordinal());
     }
+
+    @Override
+    public boolean getIsMarked() {
+       return  this._isMark;
+    }
+
+    @Override
+    public boolean getIsDestroy() {
+        return this._isDestroy;
+    }
+
+    @Override
+    public void setIsDestroy(boolean status) {
+        this._isDestroy = status;
+    }
+
+    @Override
+    public void setIsMarked(boolean status) {
+        this._isMark = status;
+    }
+
+    @Override
+    public int convertType() {
+        return this.Type.ordinal();
+    }
 }
 
 class BoxMover implements IMovable
@@ -80,9 +108,10 @@ class BoxMover implements IMovable
     }
 
     @Override
-    public void move(Point newPosition)
+    public boolean move(Point newPosition)
     {
        this.box.MatrixPosition = newPosition;
+        return true;
     }
 }
 
@@ -125,6 +154,16 @@ class BoxUpdater implements IUpdatable
         {
             this.box.Position.y = this.box.MatrixPosition.y * this.box.Size.y;
         }
+    }
+}
+
+//TODO CLICKER
+class BoxClicker implements IClicable
+{
+    @Override
+    public void click(Point clickPos)
+    {
+        GameThread.FindGameObjectByTag("Pointer");
     }
 }
 

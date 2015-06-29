@@ -4,10 +4,12 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 import com.horsegaming.cubex.core.elements.fields.BoxRandomGenerator;
 import com.horsegaming.cubex.core.elements.fields.GameField;
+import com.horsegaming.cubex.core.interfaces.IClicable;
 import com.horsegaming.cubex.core.variables.GameObject;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.List;
 /**
  * Created by Horse on 15.06.2015.
  */
-public final class GameThread extends Thread
+public final class GameThread extends Thread implements IClicable
 {
     private boolean _isRunning = false;
     private SurfaceHolder _holder;
@@ -31,9 +33,10 @@ public final class GameThread extends Thread
             this._gameObjects = gameObjects;
         else
             this._gameObjects = new ArrayList<>();
-        //TODO DELLETE
 
-        this._gameObjects.add(new GameField(new Point(0,0),new Point(500,500),"",10, null));
+        //TODO DELLETE
+        this._gameObjects.add(new GameField(new Point(0, 0), new Point(700, 700), "BoxField", 6, new BoxRandomGenerator()));
+
 
     }
 
@@ -50,11 +53,10 @@ public final class GameThread extends Thread
         while (_isRunning) {
             canvas = null;
             try {
-                try {  this.sleep(200); } catch (InterruptedException e) { e.printStackTrace();   }
+                //TODO CHECK
+                try {  this.sleep(30); } catch (InterruptedException e) { e.printStackTrace();   }
                 canvas = _holder.lockCanvas(null);
-
                     this.update(canvas);
-
             }
             finally {
                 if (canvas != null) {
@@ -90,4 +92,17 @@ public final class GameThread extends Thread
         return  null;
     }
 
+
+    @Override
+    public void click(Point clickPos) {
+
+        for(GameObject gameObject : _gameObjects)
+        {
+            if(gameObject.contains(clickPos))
+            {
+                gameObject.click(clickPos);
+                Log.d("Click in ", gameObject.getClass().toString());
+            }
+        }
+    }
 }

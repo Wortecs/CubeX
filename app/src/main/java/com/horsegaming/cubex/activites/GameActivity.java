@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.horsegaming.cubex.R;
@@ -45,8 +46,6 @@ public class GameActivity extends Activity implements ISwitchable{
     {
         this.toPrevious(null);
     }
-
-
 
 
 }

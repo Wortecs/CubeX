@@ -21,4 +21,9 @@ public class Mediator
     {
         return new RectF(position.x, position.y, position.x + size.x, position.y + size.y);
     }
+
+    public static RectF RectFAdapt(int xPos, int yPos, int xSize, int ySize)
+    {
+        return new RectF(xPos, yPos, xPos + xSize, yPos + ySize);
+    }
 }

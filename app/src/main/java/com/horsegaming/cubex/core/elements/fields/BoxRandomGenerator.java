@@ -22,13 +22,15 @@ public class BoxRandomGenerator implements IBoxGenerator
             for (int j = 0; j < matrix.length; j++)
             {
                 try {
-                    matrix[i][j] = new Box(basePosition.x + i * size.x, basePosition.y + i * size.y,
+                    matrix[i][j] = new Box(basePosition.x + i * size.x, basePosition.y + (matrix.length - j - 1) * size.y,
                             size.x, size.y,
                             String.format("Box{0}{1}",i,j),
                             BoxType.values()[random.nextInt(BoxType.values().length)],
+                           // BoxType.RED,
                             true,
                             drawer.newInstance());
                     matrix[i][j].reDraw();
+                    matrix[i][j].MatrixPosition = new Point(i ,matrix.length - j - 1);
                 } catch (InstantiationException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
