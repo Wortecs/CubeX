@@ -1,5 +1,7 @@
 package com.horsegaming.cubex.staticclasses;
 
+import android.util.Log;
+
 import com.horsegaming.cubex.core.interfaces.IDestroyable;
 
 /**
@@ -9,6 +11,8 @@ public class Destroyer
 {
     static int countMark;
     static boolean inDestroy;
+
+    public static int lastDestroyCount;
 
     private static void recursionDestroy(IDestroyable[][] arrayElements, int x, int y, boolean isMarkedToDestroy, int typeBox) {
 
@@ -52,11 +56,15 @@ public class Destroyer
 
     public static int destroy(IDestroyable[][] arrayElements, int x, int y) {
 
-        if(arrayElements[x][y] == null) return 0;
+        lastDestroyCount = 0;
+
+        if(arrayElements[x][y] == null)
+            return 0;
+
         inDestroy = true;
 
         recursionDestroy(arrayElements, x, y, true, arrayElements[x][y].convertType());
-        int tmpInt = 0;
+
         for (int i = 0; i < arrayElements.length; i++) {
             for (int j = 0; j < arrayElements[i].length; j++) {
                 if(arrayElements[i][j] == null) continue;
@@ -65,13 +73,14 @@ public class Destroyer
                 if (arrayElements[i][j].getIsDestroy())
                 {
                     arrayElements[i][j] = null;
-                    tmpInt++;
+                    lastDestroyCount++;
+
                 }
             }
         }
         countMark = 0;
         inDestroy = false;
         //Log.d("Point", tmpInt +"");
-        return tmpInt;
+        return lastDestroyCount;
     }
 }

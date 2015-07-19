@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.view.MotionEvent;
-import android.widget.TextView;
+import android.widget.Switch;
 
 import com.horsegaming.cubex.R;
 import com.horsegaming.cubex.activites.interfaces.ISwitchable;
+import com.horsegaming.cubex.activites.parameters.GameType;
 import com.horsegaming.cubex.activites.parameters.StartParams;
-import com.horsegaming.cubex.core.view.GameView;
+import com.horsegaming.cubex.view.GameView;
 import com.horsegaming.cubex.staticclasses.Mediator;
 
 public class GameActivity extends Activity implements ISwitchable{
@@ -47,5 +47,18 @@ public class GameActivity extends Activity implements ISwitchable{
         this.toPrevious(null);
     }
 
+    private void parameterizeGameType()
+    {
+        GameType gameType = GameType.values()[((StartParams)this.getIntent().getParcelableExtra
+                (this.getString(R.string.GetInGame))).GameType];
+
+        switch (gameType)
+        {
+            case ARCADE: break;
+            case TIME: break;
+            case POINT: break;
+        }
+
+    }
 
 }

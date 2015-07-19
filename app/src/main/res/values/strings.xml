@@ -14,4 +14,26 @@
     <string name="GetInMain">SendToMain</string>
     <string name="GetInEnd">SendToEnd</string>
 
+    <string name="TimeStart">Time</string>
+    <string name="StepStart">Step</string>
+    <string name="ArcadeStart">Arcade</string>
+
+    <string name="Start">Start</string>
+
+    <string name="ArcadeInfo">Solve puzzles that will become harder and harder</string>
+    <string name="TimeInfo">Collect a large number of points for a limited time</string>
+    <string name="StepInfo">Collect large number of with a limited number of clicks</string>
+
+
+
+    <string name="GameOver">Game Over</string>
+    <string name="Restart">Restart</string>
+    <string name="MainMenu">Main Menu</string>
+    <string name="YourScore">Your Score:</string>
+    <string name="BestScore">Your Best Score:</string>
+    <string name="NewBestScore">NEW BEST SCORE</string>
+    <string name="TimeLeft">Time Left:</string>
+    <string name="TouchLeft">Touch Left:</string>
+    <string name="Score">Score: </string>
+
 </resources>

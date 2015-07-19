@@ -1,8 +1,9 @@
-package com.horsegaming.cubex.core.elements.fields;
+package com.horsegaming.cubex.elements.fields;
 
 import android.graphics.Point;
+import android.util.Log;
 
-import com.horsegaming.cubex.core.enums.BoxType;
+import com.horsegaming.cubex.elements.fields.enums.BoxType;
 import com.horsegaming.cubex.core.interfaces.IReDrawable;
 
 import java.util.Random;
@@ -17,6 +18,10 @@ public class BoxRandomGenerator implements IBoxGenerator
     @Override
     public boolean generate(Box[][] matrix, Point basePosition, Point size, Class<? extends IReDrawable> drawer)
     {
+
+        //TODO delette
+        Log.d("Base" , basePosition.y + "");
+
         for (int i = 0; i < matrix.length; i++)
         {
             for (int j = 0; j < matrix.length; j++)
@@ -26,10 +31,12 @@ public class BoxRandomGenerator implements IBoxGenerator
                             size.x, size.y,
                             String.format("Box{0}{1}",i,j),
                             BoxType.values()[random.nextInt(BoxType.values().length)],
-                           // BoxType.RED,
                             true,
                             drawer.newInstance());
                     matrix[i][j].reDraw();
+                    //TODO ???
+                    matrix[i][j].GameFieldBaseYPosition = basePosition.y;
+
                     matrix[i][j].MatrixPosition = new Point(i ,matrix.length - j - 1);
                 } catch (InstantiationException e) {
                     e.printStackTrace();

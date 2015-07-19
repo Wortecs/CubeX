@@ -6,19 +6,105 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:id="@+id/L1">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView" />
+    <LinearLayout
+        android:orientation= "vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:baselineAligned="true"
+        android:background="#ecf0f1">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="58dp"
-        android:onClick="ClickTest" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:id="@+id/imageView"
+            android:layout_margin="10dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="2">
+
+            <Button
+                style="@style/ButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+
+                android:text="@string/ArcadeStart"
+                android:id="@+id/arcadeButton"
+                android:background="@drawable/button_main"
+                android:onClick="OnArcadeChoose" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/timeButton"
+                android:layout_weight="1"
+                style="@style/ButtonStyle"
+                android:background="@drawable/button_time"
+                android:text="@string/TimeStart"
+                android:onClick="OnTimeChoose"
+                android:enabled="true" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="@string/StepStart"
+                android:id="@+id/button2"
+                android:layout_weight="1"
+                style="@style/ButtonStyle"
+                android:background="@drawable/button_point"
+                android:onClick="OnPointChoose"
+                android:enabled="true" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="*ОПИСАНИЕ"
+            android:id="@+id/infoText"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="3"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Start"
+            android:id="@+id/startButton"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            style="@style/ButtonStyle"
+            android:background="@drawable/button_main"
+            android:onClick="OnStartClick" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_settings"
+            android:id="@+id/unlimitButton"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            style="@style/ButtonStyle"
+            android:background="@drawable/button_setting" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="ForBaner"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="4"
+            android:gravity="center|center_horizontal" />
+
+    </LinearLayout>
 
 </RelativeLayout>

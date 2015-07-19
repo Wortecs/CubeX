@@ -1,4 +1,4 @@
-package com.horsegaming.cubex.core.enums;
+package com.horsegaming.cubex.elements.fields.enums;
 
 /**
  * Created by Horse on 21.06.2015.

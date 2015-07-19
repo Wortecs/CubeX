@@ -1,4 +1,4 @@
-package com.horsegaming.cubex.core.elements.fields;
+package com.horsegaming.cubex.elements.fields;
 
 import android.graphics.Point;
 

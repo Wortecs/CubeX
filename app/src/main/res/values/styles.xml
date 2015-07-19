@@ -1,8 +1,29 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen">
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ButtonStyle" parent="android:Widget.Button">
+
+        <item name="android:padding">
+            5dp
+        </item>
+        <item name="android:layout_margin">
+            10dp
+        </item>
+        <item name="android:textSize">12pt</item>
+        <item name="android:textColor">#FFFFFF</item>
+
+
+
+    </style>
+
+    <style name="ButtonStyleEnd" parent="ButtonStyle">
+        <item name="android:background">
+            #3498db
+        </item>
     </style>
 
 </resources>

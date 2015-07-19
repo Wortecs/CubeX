@@ -1,14 +1,13 @@
-package com.horsegaming.cubex.core.elements.fields;
+package com.horsegaming.cubex.elements.fields;
 
+import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
 
-import com.horsegaming.cubex.core.elements.fields.drawers.RectBoxDrawer;
-import com.horsegaming.cubex.core.enums.BoxType;
-import com.horsegaming.cubex.core.interfaces.IClicable;
+import com.horsegaming.cubex.R;
+import com.horsegaming.cubex.elements.fields.drawers.RectBoxDrawer;
+import com.horsegaming.cubex.core.interfaces.IClickable;
 import com.horsegaming.cubex.core.interfaces.IDrawer;
 import com.horsegaming.cubex.core.interfaces.IUpdatable;
 import com.horsegaming.cubex.core.variables.GameObject;
@@ -24,7 +23,6 @@ public final class GameField extends GameObject
     private Box[][] _matrix;
     private IBoxGenerator _generator;
 
-
     //TODO
     public GameField(Point position, Point size, String tag, int matrixSize, IBoxGenerator generator)
     {
@@ -37,25 +35,29 @@ public final class GameField extends GameObject
         this.updatable = new GameFieldUpdater();
         this.clicable = new GameFieldClicker();
 
-        this._generator.generate(_matrix,this.Position,_elementSize, RectBoxDrawer.class);
+        this._generator.generate(_matrix, this.Position, _elementSize, RectBoxDrawer.class);
+
+        Log.d("Matrix", _matrix[0][0].Type.toString());
 
     }
 
-    public GameField(Point screenSize, String tag, int matrixSize, IBoxGenerator generator)
+    public GameField(int screenWidth, int screenHeight,  String tag, int matrixSize, IBoxGenerator generator)
     {
-        this(new Point(0,(screenSize.y - screenSize.x)/2),new Point(screenSize.x/2,screenSize.x/2),tag,matrixSize,generator);
+        this(new Point(0,(screenHeight - screenWidth)/2),new Point(screenWidth,screenWidth),tag,matrixSize,generator);
+        Log.d("Position", this.Position.toString() );
+    }
+
+    public GameField(int screenWidth, int screenHeight,  String tag, IBoxGenerator generator, Resources resources, int levelIndex)
+    {
+        this(new Point(0,(screenHeight - screenWidth)/2),new Point(screenWidth,screenWidth),tag,resources.getIntArray(R.array.level01 + levelIndex - 1)[1],generator);
     }
 
     private class GameFieldDrawer implements IDrawer
     {
-
-
         //TODO delete
-        Paint paint = new Paint();
-
+      // Paint paint = new Paint();
 
         @Override
-
         public void draw(Canvas canvas, Point position, Point size)
         {
             for (int i = 0; i < _matrix.length; i++)
@@ -66,10 +68,6 @@ public final class GameField extends GameObject
                         _matrix[i][j].update();
                         _matrix[i][j].draw(canvas);
 
-                        paint.setColor(Color.BLACK);
-                        paint.setTextSize(20);
-
-                        canvas.drawText(_matrix[i][j].MatrixPosition.toString(),_matrix[i][j].Position.x, _matrix[i][j].Position.y,paint );
                     }
                 }
             }
@@ -90,19 +88,22 @@ public final class GameField extends GameObject
         }
     }
 
-    private class  GameFieldClicker implements IClicable
+    private class  GameFieldClicker implements IClickable
     {
         @Override
         public void click(Point clickPos)
         {
+            Destroyer.lastDestroyCount = 0;
             for (int i = 0; i < _matrix.length; i++)
             {
                 for (int j = 0; j < _matrix.length; j++)
                 {
+                    //TODO NORMAL CLICK
                     if(_matrix[i][j] != null && _matrix[i][j].contains(clickPos))
                     {
-                        Log.d("Click in Box", i + " " + j);
-                        Destroyer.destroy(_matrix,i,j);
+
+                        Destroyer.destroy(_matrix, i, j);
+
                     }
                 }
             }

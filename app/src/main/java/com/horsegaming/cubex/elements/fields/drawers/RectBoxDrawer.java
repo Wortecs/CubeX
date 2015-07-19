@@ -1,10 +1,9 @@
-package com.horsegaming.cubex.core.elements.fields.drawers;
+package com.horsegaming.cubex.elements.fields.drawers;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.RectF;
 
 import com.horsegaming.cubex.core.interfaces.IReDrawable;
 import com.horsegaming.cubex.staticclasses.Mediator;
@@ -33,7 +32,6 @@ public class RectBoxDrawer implements IReDrawable {
     public void draw(Canvas canvas, Point position, Point size) {
         canvas.drawRoundRect(Mediator.RectFAdapt(position.x + _frame, position.y + _frame,size.x-_frame*2,size.y-_frame*2)
                 ,size.x/10,size.y/10,this._paint);
-
     }
 
     @Override

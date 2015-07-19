@@ -1,9 +1,12 @@
 package com.horsegaming.cubex.staticclasses;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.RectF;
 import android.os.Parcelable;
+
+import com.horsegaming.cubex.elements.fields.enums.BoxType;
 
 
 /**
@@ -25,5 +28,20 @@ public class Mediator
     public static RectF RectFAdapt(int xPos, int yPos, int xSize, int ySize)
     {
         return new RectF(xPos, yPos, xPos + xSize, yPos + ySize);
+    }
+
+
+    public static int BoxTypeToColor(BoxType type)
+    {
+        //TODO
+        switch (type) {
+            case RED:
+                return Color.rgb(255, 210, 210);
+            case GREEN:
+                return Color.rgb(210, 255, 210);
+            case BLUE:
+                return Color.rgb(210, 210, 255);
+        }
+        return -1;
     }
 }

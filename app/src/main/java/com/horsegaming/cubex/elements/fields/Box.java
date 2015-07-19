@@ -1,18 +1,18 @@
-package com.horsegaming.cubex.core.elements.fields;
+package com.horsegaming.cubex.elements.fields;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
 
-import com.horsegaming.cubex.core.enums.BoxType;
-import com.horsegaming.cubex.core.gamethreed.GameThread;
-import com.horsegaming.cubex.core.interfaces.IClicable;
+import com.horsegaming.cubex.elements.fields.enums.BoxType;
+import com.horsegaming.cubex.core.gamethreed.DrawThread;
+import com.horsegaming.cubex.core.interfaces.IClickable;
 import com.horsegaming.cubex.core.interfaces.IDestroyable;
 import com.horsegaming.cubex.core.interfaces.IMovable;
 import com.horsegaming.cubex.core.interfaces.IReDrawable;
 import com.horsegaming.cubex.core.interfaces.ISizable;
 import com.horsegaming.cubex.core.interfaces.IUpdatable;
 import com.horsegaming.cubex.core.variables.GameObject;
-import com.horsegaming.cubex.core.elements.fields.drawers.RectBoxDrawer;
+import com.horsegaming.cubex.elements.fields.drawers.RectBoxDrawer;
 
 /**
  * Created by Horse on 21.06.2015.
@@ -22,6 +22,7 @@ final class Box extends GameObject implements IDestroyable
 {
     public BoxType Type;
     protected IReDrawable drawable;
+    public int GameFieldBaseYPosition;
     public Point MatrixPosition = new Point();
 
     private boolean _isMark;
@@ -147,23 +148,25 @@ class BoxUpdater implements IUpdatable
     @Override
     public void update()
     {
-        if( this.box.Position.y < this.box.MatrixPosition.y * this.box.Size.y  )
+        if( this.box.Position.y < this.box.MatrixPosition.y * this.box.Size.y + box.GameFieldBaseYPosition  )
         {
             this.box.Position.y += this.box.Size.y/5;
-        }else if (this.box.Position.y > this.box.MatrixPosition.y * this.box.Size.y)
+        }else if (this.box.Position.y > this.box.MatrixPosition.y * this.box.Size.y + box.GameFieldBaseYPosition)
         {
-            this.box.Position.y = this.box.MatrixPosition.y * this.box.Size.y;
+            this.box.Position.y = this.box.MatrixPosition.y * this.box.Size.y + box.GameFieldBaseYPosition;
         }
     }
 }
 
 //TODO CLICKER
-class BoxClicker implements IClicable
+class BoxClicker implements IClickable
 {
     @Override
     public void click(Point clickPos)
     {
-        GameThread.FindGameObjectByTag("Pointer");
+
     }
 }
+
+
 
