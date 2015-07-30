@@ -4,9 +4,6 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-import com.horsegaming.cubex.core.variables.Timing;
-import com.horsegaming.cubex.core.variables.GameObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,27 +17,20 @@ public final class DrawThread extends Thread
     private SurfaceHolder _holder;
     private Resources _resources;
 
-    private static List<GameObject> _gameObjects;
+    //private static List<GameObject> _gameObjects;
 
-    public DrawThread(SurfaceHolder holder, Resources resources, List<GameObject> gameObjects)
-    {
-        this(holder,resources);
-        if(gameObjects != null)
-            this._gameObjects = gameObjects;
-        else
-            this._gameObjects = new ArrayList<>();
-    }
-
-    private DrawThread(SurfaceHolder holder, Resources resources)
+    public DrawThread(SurfaceHolder holder, Resources resources)
     {
         this._resources = resources;
         this._holder = holder;
-        Timing.refreshColor();
+
     }
+
 
     @Override
     public void run()
     {
+        /*
         Canvas canvas;
         while (_isRunning) {
 
@@ -60,10 +50,12 @@ public final class DrawThread extends Thread
                 _lastFrameTime = now;
             }
         }
+        */
     }
 
     private  void update( Canvas canvas )
     {
+        /*
         if(canvas == null) return;
 
         canvas.drawColor(Timing.getBackgroundColor());
@@ -73,6 +65,7 @@ public final class DrawThread extends Thread
         }
 
         Timing.DeltaTime = (int)(System.currentTimeMillis() - _lastFrameTime);
+        */
     }
 
     public void setRunning (boolean status)
